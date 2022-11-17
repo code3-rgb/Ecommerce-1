@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken')
 const Auth = require('../MiddleWare/authMiddleWare')
 
 const generateToken = (id)=>{
-    return jwt.sign({id},'1234567',{
+    return jwt.sign({id},process.env.JWT_KEY,{
         expiresIn: '600s'
     })
 }
