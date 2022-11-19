@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form data</title>
+</head>
+<body>
+    
+    <form>
+      <input type="file" name="image" />
+      <button type="submit">Submit</button>
+    </form>
+
+
+
+    <script>
+
+      const form = document.querySelector('form')
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault()
+
+        const formData = new FormData(form)
+
+        for ( item of formData) {
+          console.log(item[0], item[1])
+        }
+        console.log(formData.fname)
+
+        fetch("http://localhost:3001/form", {
+          mode: 'no-cors',
+          method: "POST",
+          body: formData,
+          headers: {
+            'Access-Control-Allow-Origin':'*'
+          }
+          
+        })
+        // .then(res=> res.json())
+        // .then(res=> console.log(res))
+
+
+      })
+
+   </script>
+
+</body>
+</html>

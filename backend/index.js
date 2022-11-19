@@ -3,12 +3,20 @@ require('dotenv').config({path: './config.env'})
 
 const express = require('express')
 const app = express()
+const upload = require('express-fileupload')
+
+
+
 
 
 const userRoute = require('../Routes/user')
+const productRoute = require('../Routes/product')
 const DataBaseConnect = require('../Database/ConnectDb/mongoose')
-// const Auth = require('../MiddleWare/authMiddleWare')
-// app.use(Auth)
+const Auth = require('../MiddleWare/authMiddleWare')
+
+app.use(upload())
+app.use(Auth)
+
 
 
 app.use(express.urlencoded({ extended: true }))
@@ -23,7 +31,9 @@ DataBaseConnect();
 
 
 
+
 app.use('/user',userRoute)
+app.use('/',productRoute)
 
 
 console.log(process.env.PORT)

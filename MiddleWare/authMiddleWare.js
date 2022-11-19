@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const User = require('../Database/Schemas/userSchema')
+const User = require(__dirname.replace("/MiddleWare","/Database/Schemas/userSchema"))
 
 
 
@@ -27,13 +27,7 @@ const Auth = async (req,res,next)=>{
 
         } 
 
-        res.status(400)
-        res.json({
-            message:'You are not authorized!'
-        })
-        return 
-
-
+        next()
 }
 
 module.exports = Auth
